@@ -1,16 +1,14 @@
 {
-    "builds": [
-        {
-            "src": "server.js",
-            "use": "@vercel/node",
-            "config": {}
-        }
-    ],
-    
-    "rewrites": [
-        {
-            "source": "/send-email",
-            "destination": "/send-email"
-        }
-    ]
+  "functions": {
+    "server.js": {
+      "memory": 1024,
+      "includeFiles": ""
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "server.js"
+    }
+  ]
 }
