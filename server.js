@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const cors = require("cors"); // Importe o módulo CORS
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // Use a variável de ambiente para a porta
 const { parsePhoneNumberFromString } = require("libphonenumber-js");
 
 //Configurar o middleware CORS
