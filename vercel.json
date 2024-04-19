@@ -3,15 +3,13 @@
         {
             "src": "server.js",
             "use": "@vercel/node",
-            "config": {
-                
-            }
+            "config": {}
         }
     ],
     "rewrites": [
         {
-            "src": "/(.*)",
-            "dest": "server.js"
+            "source": "/send-email",
+            "destination": "/send-email"
         }
     ]
 }
