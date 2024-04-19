@@ -1,3 +1,4 @@
+import  'dotenv/config'
 const express = require("express");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
@@ -39,15 +40,15 @@ server.post("/send-email", (req, res) => {
     port: "587",
     secure: false,
     auth: {
-      user: "barrospersonalchef@hotmail.com",
-      pass: "barros@personalchef",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
   //configurar o email a ser enviado
   const mailOptions = {
-    from: "barrospersonalchef@hotmail.com",
-    to: "barrospersonalchef@hotmail.com",
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
     subject: fullName.toUpperCase(),
     html: `
     <table style="border-collapse: collapse; width: 60%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
