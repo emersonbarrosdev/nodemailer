@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 //Rota para lidar com o envio do formulário
 app.post("/send-email", (req, res) => {
-  const { fullName, email, phone, eventType, numberOfGuests, message } =
+  const { fullName, email, phone, eventType, numberOfPeoples, message } =
     req.body;
 
   // Formatando o número de telefone
@@ -31,7 +31,7 @@ app.post("/send-email", (req, res) => {
     }
   }
 
-  let formattedNumberOfGuests = numberOfGuests || "";
+  let formattedNumberOfPeoples = numberOfPeoples || "";
 
   //configurar transporte de email
   const transporter = nodemailer.createTransport({
@@ -71,8 +71,8 @@ app.post("/send-email", (req, res) => {
         <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">${eventType}</td>
       </tr>
       <tr style="background-color: #f2f2f2;">
-        <td style="padding: 12px; text-align: right; font-weight: bold; border-bottom: 1px solid #ddd;">Convidados:</td>
-        <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">${formattedNumberOfGuests}</td>
+        <td style="padding: 12px; text-align: right; font-weight: bold; border-bottom: 1px solid #ddd;">Pessoas:</td>
+        <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">${formattedNumberOfPeoples}</td>
       </tr>
       <tr style="background-color: #fff;">
         <td style="padding: 12px; text-align: right; font-weight: bold; border-bottom: 1px solid #ddd;">Mensagem:</td>
