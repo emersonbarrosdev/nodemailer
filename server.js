@@ -1,20 +1,27 @@
+const jsonServer = require('json-server')
+// const server = jsonServer.create()
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const cors = require("cors"); // Importe o módulo CORS
-const app = express();
+const server = express();
+const middlewares = jsonServer.defaults()
 const port = process.env.PORT || 3000; // Use a variável de ambiente para a porta
 const { parsePhoneNumberFromString } = require("libphonenumber-js");
 
 //Configurar o middleware CORS
-app.use(cors());
+server.use(cors());
+
+server.use(middlewares)
+server.use(router)
 
 //configurar o body-parser para analisar dados de formulário
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
 
 //Rota para lidar com o envio do formulário
-app.post("/send-email", (req, res) => {
+server.post("/send-email", (req, res) => {
   const { fullName, email, phone, eventType, numberOfPeoples, message } =
     req.body;
 
@@ -100,8 +107,8 @@ app.post("/send-email", (req, res) => {
 });
 
 // Iniciar o servidor
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
 
-module.exports = express
+module.exports = server
