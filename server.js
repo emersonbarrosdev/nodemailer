@@ -1,20 +1,13 @@
-const jsonServer = require('json-server')
-// const server = jsonServer.create()
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const cors = require("cors"); // Importe o módulo CORS
 const server = express();
-const middlewares = jsonServer.defaults()
 const port = process.env.PORT || 3000; // Use a variável de ambiente para a porta
 const { parsePhoneNumberFromString } = require("libphonenumber-js");
 
 //Configurar o middleware CORS
 server.use(cors());
-
-server.use(middlewares)
-server.use(router)
 
 //configurar o body-parser para analisar dados de formulário
 server.use(bodyParser.urlencoded({ extended: false }));
