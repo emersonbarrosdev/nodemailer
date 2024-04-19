@@ -18,9 +18,8 @@ server.post("/send-email", (req, res) => {
   const { fullName, email, phone, eventType, numberOfPeoples, message } =
     req.body;
 
-  // Formatando o número de telefone
   // Formatar o número de telefone se estiver preenchido
-  let formattedPhone = "";
+  let formattedPhone = "-";
   if (phone) {
     formattedPhone = parsePhoneNumberFromString(phone, "BR");
     if (formattedPhone) {
@@ -31,7 +30,8 @@ server.post("/send-email", (req, res) => {
     }
   }
 
-  let formattedNumberOfPeoples = numberOfPeoples || "";
+  let formattedNumberOfPeoples = numberOfPeoples || "-";
+  let formattedMessage = message || "-";
 
   //configurar transporte de email
   const transporter = nodemailer.createTransport({
@@ -55,28 +55,28 @@ server.post("/send-email", (req, res) => {
         <td colspan="2" style="padding: 12px; text-align: center; color: #F1E9D4;"><h3>DETALHES DO CLIENTE</h3></td>
       </tr>
       <tr style="background-color: #f2f2f2;">
-        <td style="padding: 12px; text-align: left; font-weight: bold; border-bottom: 1px solid #ddd;">Nome:</td>
+        <td style="padding: 12px; text-align: right; font-weight: bold; border-bottom: 1px solid #ddd;">Nome:</td>
         <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">${fullName}</td>
       </tr>
       <tr style="background-color: #fff;">
-        <td style="padding: 12px; text-align: left; font-weight: bold; border-bottom: 1px solid #ddd;">E-mail:</td>
+        <td style="padding: 12px; text-align: right; font-weight: bold; border-bottom: 1px solid #ddd;">E-mail:</td>
         <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">${email}</td>
       </tr>
       <tr style="background-color: #f2f2f2;">
-        <td style="padding: 12px; text-align: left; font-weight: bold; border-bottom: 1px solid #ddd;">Celular:</td>
+        <td style="padding: 12px; text-align: right; font-weight: bold; border-bottom: 1px solid #ddd;">Celular:</td>
         <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">${formattedPhone}</td>
       </tr>
       <tr style="background-color: #fff;">
-        <td style="padding: 12px; text-align: left; font-weight: bold; border-bottom: 1px solid #ddd;">Evento:</td>
+        <td style="padding: 12px; text-align: right; font-weight: bold; border-bottom: 1px solid #ddd;">Evento:</td>
         <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">${eventType}</td>
       </tr>
       <tr style="background-color: #f2f2f2;">
-        <td style="padding: 12px; text-align: left; font-weight: bold; border-bottom: 1px solid #ddd;">Pessoas:</td>
+        <td style="padding: 12px; text-align: right; font-weight: bold; border-bottom: 1px solid #ddd;">Pessoas:</td>
         <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">${formattedNumberOfPeoples}</td>
       </tr>
       <tr style="background-color: #fff;">
-        <td style="padding: 12px; text-align: left; font-weight: bold; border-bottom: 1px solid #ddd;">Mensagem:</td>
-        <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">${message}</td>
+        <td style="padding: 12px; text-align: right; font-weight: bold; border-bottom: 1px solid #ddd;">Mensagem:</td>
+        <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">${formattedMessage}</td>
       </tr>
     </table>
   `,
@@ -104,4 +104,4 @@ server.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
 
-module.exports = server
+module.exports = server;
