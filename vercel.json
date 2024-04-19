@@ -1,15 +1,15 @@
 {
+    "version": 2,
     "builds": [
         {
             "src": "server.js",
-            "use": "@vercel/node",
-            "config": {}
+            "use": "@vercel/node"
         }
     ],
-    "rewrites": [
+    "routes": [
         {
-            "source": "/send-email",
-            "destination": "/send-email"
+            "src:": "(.*)",
+            "dest": "server.js"
         }
     ]
 }
